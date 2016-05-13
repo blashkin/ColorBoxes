@@ -83,6 +83,10 @@
      }];
 }
 
+
+#pragma mark - Setters & Getters
+
+
 - (void)setWeatherButton:(UIButton *)weatherButton
 {
     _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];

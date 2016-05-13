@@ -9,12 +9,6 @@
 #import "LocationManager.h"
 #import "Alert.h"
 
-@interface LocationManager() <UIAlertViewDelegate>
-
-@property (nonatomic) NSURL *settingsURL;
-
-@end
-
 @implementation LocationManager
 
 
@@ -78,6 +72,10 @@
     }
 }
 
+
+#pragma mark - Public API
+
+
 - (void)requestAuthorization
 {
     _status = [CLLocationManager authorizationStatus];
@@ -111,16 +109,6 @@
 - (void)stopUpdatingLocation
 {
     [_locationManager stopUpdatingLocation];
-}
-
-- (NSURL *)settingsURL
-{
-    if (!_settingsURL)
-    {
-        _settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-    }
-    
-    return _settingsURL;
 }
 
 
