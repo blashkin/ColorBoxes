@@ -10,4 +10,7 @@
 
 @interface BoxesViewController : UIViewController
 
+- (void)addColors:(NSArray *)buttons;
+- (void)getColors:(NSInteger)count;
+
 @end

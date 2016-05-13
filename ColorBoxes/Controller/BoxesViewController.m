@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    ![Box boxes].count ? [self addColors] : [self getColors];
+    ![Box boxes].count ? [self addColors:self.buttons] : [self getColors:[Box boxes].count];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,7 +54,7 @@
     sender.backgroundColor = color;
 }
 
-- (void)addColors
+- (void)addColors:(NSArray *)buttons
 {
     for (UIButton *button in _buttons)
     {
@@ -66,14 +66,17 @@
     }
 }
 
-- (void)getColors
+- (void)getColors:(NSInteger)count
 {
-    for (NSInteger i = 0; i < [Box boxes].count; i++)
+    if ([Box boxes].count == count)
     {
-        Box *box = [Box boxes][i];
-        UIColor *color = (UIColor *)[NSKeyedUnarchiver unarchiveObjectWithData:box.color];
-        UIButton *button = _buttons[i];
-        button.backgroundColor = color;
+        for (NSInteger i = 0; i < [Box boxes].count; i++)
+        {
+            Box *box = [Box boxes][i];
+            UIColor *color = (UIColor *)[NSKeyedUnarchiver unarchiveObjectWithData:box.color];
+            UIButton *button = _buttons[i];
+            button.backgroundColor = color;
+        }
     }
 }
 
