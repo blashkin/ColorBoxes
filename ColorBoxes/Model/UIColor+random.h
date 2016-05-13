@@ -11,8 +11,5 @@
 @interface UIColor (random)
 
 + (UIColor *)randomColor;
-+ (CGFloat)red;
-+ (CGFloat)green;
-+ (CGFloat)blue;
 
 @end

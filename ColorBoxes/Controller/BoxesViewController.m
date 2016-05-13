@@ -13,10 +13,6 @@
 
 @interface BoxesViewController ()
 
-{
-    NSArray * _boxes;
-}
-
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 
 @end
@@ -28,16 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (_boxes.count > 0)
-    {
-        for (NSInteger i = 0; i < _boxes.count; i++)
-        {
-            Box *box = _boxes[i];
-            UIColor *color = (UIColor *)[NSKeyedUnarchiver unarchiveObjectWithData:box.color];
-            UIButton *button = _buttons[i];
-            button.backgroundColor = color;
-        }
-    }
+    ![Box boxes].count ? [self addColors] : [self getColors];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,7 +45,8 @@
 - (IBAction)colorChanged:(UIButton *)sender
 {
     NSInteger index = [_buttons indexOfObject:sender];
-    Box *box = _boxes[index];
+    
+    Box *box = [Box boxes][index];
     
     UIColor *color = [UIColor randomColor];
     NSData *dataColor = [NSKeyedArchiver archivedDataWithRootObject:color];
@@ -66,24 +54,27 @@
     sender.backgroundColor = color;
 }
 
-- (void)setButtons:(NSArray *)buttons
+- (void)addColors
 {
-    _boxes = [Box boxes];
-    if (!_boxes.count)
+    for (UIButton *button in _buttons)
     {
-        for (UIButton *button in buttons)
-        {
-            UIColor *color = [UIColor randomColor];
-            NSData *dataColor = [NSKeyedArchiver archivedDataWithRootObject:color];
-            
-            [Box boxWithDataColor:dataColor];
-            button.backgroundColor = color;
-        }
+        UIColor *color = [UIColor randomColor];
+        NSData *dataColor = [NSKeyedArchiver archivedDataWithRootObject:color];
+        
+        [Box boxWithDataColor:dataColor];
+        button.backgroundColor = color;
     }
-    
-    _buttons = buttons;
 }
 
-
+- (void)getColors
+{
+    for (NSInteger i = 0; i < [Box boxes].count; i++)
+    {
+        Box *box = [Box boxes][i];
+        UIColor *color = (UIColor *)[NSKeyedUnarchiver unarchiveObjectWithData:box.color];
+        UIButton *button = _buttons[i];
+        button.backgroundColor = color;
+    }
+}
 
 @end

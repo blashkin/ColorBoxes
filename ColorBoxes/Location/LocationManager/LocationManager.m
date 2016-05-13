@@ -95,9 +95,9 @@
         if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
         {
             [self.locationManager requestWhenInUseAuthorization];
+            
+            [self.locationManager requestLocation];
         }
-
-        [self.locationManager requestLocation];
 
         [self startUpdatingLocation];
     }

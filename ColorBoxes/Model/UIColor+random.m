@@ -12,31 +12,12 @@
 
 + (UIColor *)randomColor
 {
-    //CGFloat red = (arc4random()%256/256.0);
-    //CGFloat green = (arc4random()%256/256.0);
-    //CGFloat blue = (arc4random()%256/256.0);
+    CGFloat red = (arc4random()%256/256.0);
+    CGFloat green = (arc4random()%256/256.0);
+    CGFloat blue = (arc4random()%256/256.0);
     
-    return [UIColor colorWithRed:self.red green:self.green blue:self.blue alpha:1.0];
+    return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
 }
 
-+ (CGFloat)red
-{
-    return self.random;
-}
-
-+ (CGFloat)green
-{
-    return self.random;
-}
-
-+ (CGFloat)blue
-{
-    return self.random;
-}
-
-+ (CGFloat)random
-{
-    return arc4random()%256/256.0;
-}
 
 @end

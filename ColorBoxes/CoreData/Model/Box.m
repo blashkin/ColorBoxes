@@ -14,28 +14,21 @@
 
 + (Box *)boxWithDataColor:(NSData *)dataColor
 {
-    NSError *error = nil;
     NSManagedObjectContext *context = [CDManager sharedManager].managedObjectContext;
     Box *box = [NSEntityDescription insertNewObjectForEntityForName:@"Box" inManagedObjectContext:context];
     box.color = dataColor;
     
-    if (![context save:&error])
-    {
-        NSLog(@"error: %@", error.localizedDescription);
-    }
+    [box saveInContext:context];
+    
     return box;
 }
 
 + (void)addBox:(Box *)box withDataColor:(NSData *)dataColor
 {
-    NSError *error = nil;
     NSManagedObjectContext *context = [CDManager sharedManager].managedObjectContext;
     box.color = dataColor;
     
-    if (![context save:&error])
-    {
-        NSLog(@"error: %@", error.localizedDescription);
-    }
+    [box saveInContext:context];
 }
 
 + (NSArray *)boxes
@@ -46,38 +39,13 @@
     return [context executeFetchRequest:request error:&error];
 }
 
-/*
- + (Box *)boxWithDataColor:(NSData *)dataColor
- {
- NSError *error = nil;
- NSManagedObjectContext *context = [CDManager sharedManager].managedObjectContext;
- Box *box = nil;
- 
- 
- NSArray *results = [Box boxes];
- 
- if (error || !results)
- {
- NSLog(@"error: %@", error.localizedDescription);
- }
- else if (results.firstObject)
- {
- box = results.firstObject;
- }
- else
- {
- box = [NSEntityDescription insertNewObjectForEntityForName:@"Box" inManagedObjectContext:context];
- box.color = dataColor;
- }
- 
- if (![context save:&error])
- {
- NSLog(@"error: %@", error.localizedDescription);
- }
- return box;
- }
-
-*/
-
+- (void)saveInContext:(NSManagedObjectContext *)context
+{
+    NSError *error = nil;
+    if (![context save:&error])
+    {
+        NSLog(@"error: %@", error.localizedDescription);
+    }
+}
 
 @end
