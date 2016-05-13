@@ -11,7 +11,7 @@
 
 BOOL isIos7();
 
-@interface Alert : NSObject <UIAlertViewDelegate>
+@interface Alert : NSObject
 
 + (instancetype)initWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (instancetype)initWithSettingsAndTitle:(NSString *)title andMessage:(NSString *)message;

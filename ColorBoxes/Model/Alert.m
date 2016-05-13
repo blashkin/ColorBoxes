@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSURL *settingsURL;
 @property (nonatomic) UIWindow *alertWindow;
+
 @end
 
 BOOL isIos7()
@@ -40,14 +41,13 @@ BOOL isIos7()
     return alert;
 }
 
-
 + (instancetype)initWithSettingsAndTitle:(NSString *)title andMessage:(NSString *)message
 {
     Alert *alert = [Alert new];
     
     if (isIos7())
     {
-        [[[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Settings", nil]show];
+        [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]show];
     }
     else
     {
@@ -55,7 +55,7 @@ BOOL isIos7()
         UIAlertAction *settings = [UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
                                    {
                                        // Send the user to the Settings for this app
-                                       [[UIApplication sharedApplication] openURL:alert.settingsURL];
+                                       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
                                    }];
         
         [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
@@ -65,25 +65,6 @@ BOOL isIos7()
     }
     
     return alert;
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        // Send the user to the Settings for this app
-        [[UIApplication sharedApplication] openURL:self.settingsURL];
-    }
-}
-
-- (NSURL *)settingsURL
-{
-    if (!_settingsURL)
-    {
-        _settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-    }
-    
-    return _settingsURL;
 }
 
 - (UIWindow *)alertWindow
