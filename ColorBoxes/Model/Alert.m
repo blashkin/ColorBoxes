@@ -73,7 +73,7 @@ BOOL isIos7()
     {
         _alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _alertWindow.rootViewController = [UIViewController new];
-        _alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        _alertWindow.windowLevel = UIWindowLevelAlert;
         [_alertWindow makeKeyAndVisible];
     }
     
